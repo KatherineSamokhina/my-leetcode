@@ -1,0 +1,16 @@
+class Solution {
+public:
+    vector<int> dailyTemperatures(vector<int>& temperatures) {
+        vector<int> answer(temperatures. size());
+        vector<int> tempFirstPos( 101, (int)temperatures.size());
+        for(int i = temperatures. size() - 1; i >= 0; --i) {
+            int minPos = (int)temperatures.size();
+            for(int j = temperatures[i] + 1; j < 101; ++j)
+                minPos = min(minPos, tempFirstPos[j]);
+            if(minPos != (int)temperatures.size())
+                answer[i] = minPos - i;
+            tempFirstPos[temperatures[i]] = i;
+        }
+        return answer;
+    }
+};
