@@ -1,0 +1,25 @@
+class Solution {
+public:
+    vector<set<int>> GetVertexList(int n, vector<vector<int>>& edges) {
+        vector<set<int>> vertices(n);
+        for(auto edge : edges) {
+            vertices[edge[0]].insert(edge[1]);
+            vertices[edge[1]].insert(edge[0]);
+        }
+        return vertices;
+    }
+
+    void DFS(int start, vector<set<int>>& vertices, vector<bool>& visited) {
+        visited[start] = true;
+        for (int to : vertices[start])
+            if (!visited[to])
+                DFS(to, vertices, visited);
+    }
+
+    bool validPath(int n, vector<vector<int>>& edges, int source, int destination) {
+        vector<set<int>> vertices = GetVertexList(n, edges);
+        vector<bool> visited(n);
+        DFS(source, vertices, visited);
+        return visited[destination];
+    }
+};
