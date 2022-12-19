@@ -1,0 +1,48 @@
+class MyQueue {
+public:
+    MyQueue()
+        : common()
+        , buffer()
+    {}
+    
+    void push(int x) {
+        common.push(x);
+    }
+    
+    int pop() {
+        FromComToBuf();
+        int el = buffer.top();
+        buffer.pop();
+        FromBufToCom();
+        return el;
+    }
+    
+    int peek() {
+        FromComToBuf();
+        int el = buffer.top();
+        FromBufToCom();
+        return el;
+    }
+    
+    bool empty() {
+        return common.empty() && buffer.empty();
+    }
+
+private:
+    stack<int> common;
+    stack<int> buffer;
+
+    void FromComToBuf() {
+        while(!common.empty()) {
+            buffer.push(common.top());
+            common.pop();
+        }
+    }
+
+    void FromBufToCom() {
+        while(!buffer.empty()) {
+            common.push(buffer.top());
+            buffer.pop();
+        }
+    }
+};
