@@ -1,0 +1,10 @@
+class Solution {
+public:
+    string toLowerCase(string s) {
+        for(auto& l: s) {
+            if(l>='A' && l<='Z')
+                l+=32;
+        }
+        return s;
+    }
+};
