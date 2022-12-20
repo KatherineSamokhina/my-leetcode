@@ -1,0 +1,18 @@
+class Solution {
+public:
+    void DFS(int start, vector<vector<int>>& vertices, vector<bool>& visited) {
+        visited[start] = true;
+        cout << start + 1 << " ";
+        for (int to : vertices[start])
+            if (!visited[to])
+                DFS(to, vertices, visited);
+    }
+    bool canVisitAllRooms(vector<vector<int>>& rooms) {
+        vector<bool> visited(rooms.size());
+        DFS(0 , rooms, visited);
+        for(const auto& v : visited) {
+            if(!v) return false;
+        }
+        return true;
+    }
+};
