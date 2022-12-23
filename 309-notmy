@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        if(prices.empty())
+            return 0;
+        int ans = 0;
+        int bestPrefix = 0;
+        int bestPrefixPrev = 0;
+        int bestDiff = -prices[0];
+        for(int day = 1; day < prices.size(); ++day) {
+            int bestSum = prices[day] + bestDiff;
+            int bestPrefixPrevPrev = bestPrefixPrev;
+            bestPrefixPrev = bestPrefix;
+            bestPrefix = max(bestPrefix, bestSum);
+            ans = bestPrefix;
+            bestDiff = max(bestDiff, -prices[day] + bestPrefixPrevPrev);
+        }
+        return ans;
+    }
+};
