@@ -1,0 +1,10 @@
+class Solution {
+public:
+    vector<int> searchRange(vector<int>& nums, int target) {
+        auto right = upper_bound(nums.begin(), nums.end(), target);
+        if(right == nums.begin() || *(right - 1) != target)
+            return {-1, -1};
+        auto left = lower_bound(nums.begin(), right, target);
+        return {(int)(left - nums.begin()), (int)(right - nums.begin()) - 1};
+    }
+};
