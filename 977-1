@@ -1,0 +1,25 @@
+class Solution {
+public:
+    vector<int> sortedSquares(vector<int>& nums) {
+        vector<int> squares(nums.size());
+        int left = 0;
+        int right = nums.size() - 1;
+        int i = nums.size();
+        int left_square;
+        int right_square;
+        while(left <= right) {
+            --i;
+            left_square = nums[left] * nums[left];
+            right_square = nums[right] * nums[right];
+            if(left_square >= right_square) {
+                squares[i] = left_square;
+                ++left;
+            }
+            else {
+                squares[i] = right_square;
+                --right;
+            }
+        }
+        return squares;
+    }
+};
