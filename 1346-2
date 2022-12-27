@@ -1,0 +1,12 @@
+class Solution {
+public:
+    bool checkIfExist(vector<int>& arr) {
+        unordered_map<int, int> value_to_index;
+	    for(int i = 0; i < arr.size(); ++i)
+		    value_to_index[arr[i]] = i;
+	    for(int i = 0; i < arr.size(); ++i)
+		    if(value_to_index.count(arr[i] * 2) && value_to_index[arr[i] * 2] != i)
+			    return true;
+        return false;
+    }
+};
