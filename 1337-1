@@ -1,0 +1,28 @@
+class Solution {
+public:
+    vector<int> kWeakestRows(vector<vector<int>>& mat, int k) {
+        multimap<int, int> counts;
+        for(int i = 0; i < mat.size(); ++i) {
+            int left = 0;
+            int right = mat[i].size() - 1;
+            while(left <= right) {
+                int mid = left + (right - left) / 2;
+                if(mat[i][mid] == 0)
+                    right = mid - 1;
+                else
+                    left = mid + 1;
+            }
+            counts.insert({left, i});
+        }
+        vector<int> ans;
+        int i = -1;
+        for(auto c : counts) {
+            ++i;
+            if(i < k)
+                ans.push_back(c.second);
+            else
+                break;
+        }
+        return ans;
+    }
+};
