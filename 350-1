@@ -1,0 +1,19 @@
+class Solution {
+public:
+    vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
+        vector<int> ans;
+        sort(nums1.begin(), nums1.end());
+        sort(nums2.begin(), nums2.end());
+        auto start = nums1.begin();
+        for (int n : nums2) {
+            auto it = find(start, nums1.end(), n);
+            if (it != nums1.end()) {
+                ans.push_back(*it);
+                start = it + 1;
+                if (start == nums1.end())
+                    break;
+            }
+        }
+        return ans;
+    }
+};
