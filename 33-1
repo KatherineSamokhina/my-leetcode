@@ -1,0 +1,41 @@
+class Solution {
+public:
+    int BinarySearch(const vector<int>& v, int t, int left, int right) {
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (v[mid] > t)
+                right = mid - 1;
+            else if (v[mid] < t)
+                left = mid + 1;
+            else
+                return mid;
+        }
+        return -1;
+    }
+    int FindBorder(const vector<int>& v) {
+        int left = 1;
+        int right = v.size() - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (v[mid] < v[mid - 1])
+                return mid;
+            else if (v[mid] > v[0])
+                left = mid + 1;
+            else
+                right = mid - 1;
+        }
+        return right;
+    }
+    int search(vector<int>& nums, int target) {
+        if(nums.size() == 0)
+            return -1;
+        if(nums[0] > nums[nums.size() - 1]) {
+            int border = FindBorder(nums);
+            if(target >= nums[0])
+                return BinarySearch(nums, target, 0, border - 1);
+            return BinarySearch(nums, target, border, nums.size() - 1);
+        }
+        else
+            return BinarySearch(nums, target, 0, nums.size() - 1);
+    }
+};
