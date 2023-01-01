@@ -19,7 +19,7 @@ public:
                     letters.insert(pattern[i]);
                 }
             }
-            if (hash[words[i]] != pattern[i])
+            else if (hash[words[i]] != pattern[i])
                 return false;
         }
         return true;
