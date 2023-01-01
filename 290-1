@@ -1,0 +1,27 @@
+class Solution {
+public:
+    bool wordPattern(string pattern, string s) {
+        vector<string> words;
+        istringstream ss(s);
+        string buf;
+        while (ss >> buf)
+            words.push_back(buf);
+        if (words.size() != pattern.size())
+            return false;
+        unordered_map<string, char> hash;
+        unordered_set<char> letters;
+        for (int i = 0; i < words.size(); ++i) {
+            if (hash.find(words[i]) == hash.end()) {
+                if (letters.find(pattern[i]) != letters.end())
+                    return false;
+                else {
+                    hash[words[i]] = pattern[i];
+                    letters.insert(pattern[i]);
+                }
+            }
+            if (hash[words[i]] != pattern[i])
+                return false;
+        }
+        return true;
+    }
+};
