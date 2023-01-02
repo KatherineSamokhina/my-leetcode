@@ -1,0 +1,31 @@
+class Solution {
+public:
+    bool isBig (const char& c) {
+        if(c >= 'A' && c <= 'Z')
+            return true;
+        return false;
+    }
+
+    bool detectCapitalUse(string word) {
+        if(word.size() == 1)
+            return true;
+        if(isBig(word[0])) {
+            if(!isBig(word[1])){
+                for(int i = 2; i < word.size(); ++i)
+                    if(isBig(word[i]))
+                        return false;
+                return true;
+            }
+            else {
+                for(int i = 2; i < word.size(); ++i)
+                    if(!isBig(word[i]))
+                        return false;
+                return true;
+            }
+        }
+        for(int i = 1; i < word.size(); ++i)
+            if(isBig(word[i]))
+                    return false;
+        return true;
+    }
+};
