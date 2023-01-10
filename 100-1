@@ -1,0 +1,19 @@
+class Solution {
+public:
+    bool DFS(TreeNode* p, TreeNode* q) {
+        if(p == nullptr && q == nullptr)
+            return true;
+        if((p == nullptr && q != nullptr) || (p != nullptr && q == nullptr))
+            return false;
+        bool left = DFS(p->left, q->left);
+        bool right = DFS(p->right, q->right);
+        if(left && right && (p->val == q->val))
+            return true;
+        else
+            return false;
+    }
+    
+    bool isSameTree(TreeNode* p, TreeNode* q) {
+        return DFS(p, q);
+    }
+};
